@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Subtitles Extractor</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 2rem; }
+        textarea { width: 100%; height: 400px; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <h1>YouTube Subtitles Extractor</h1>
+    <form action="/get_subtitles" method="get">
+        <label for="url">YouTube URL:</label><br>
+        <input type="text" id="url" name="url" value="{{ url }}" style="width: 100%; padding: 0.5rem;"><br><br>
+
+        <label for="format">Subtitle Format:</label>
+        <select name="format" id="format">
+            <option value="with" {% if format == 'with' %}selected{% endif %}>With Timestamps</option>
+            <option value="without" {% if format == 'without' %}selected{% endif %}>Without Timestamps</option>
+        </select><br><br>
+
+        <button type="submit">Extract Subtitles</button>
+    </form>
+
+    {% if subtitles %}
+        <h2>Extracted Subtitles</h2>
+        <label for="extracted-subtitles">Extracted Subtitles:</label>
+        <textarea id="extracted-subtitles" readonly title="Extracted subtitles will appear here" placeholder="Extracted subtitles will appear here">{{ subtitles }}</textarea>
+    {% endif %}
+</body>
+</html>
